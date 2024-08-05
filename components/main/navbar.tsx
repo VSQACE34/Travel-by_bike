@@ -1,7 +1,6 @@
 import { Socials } from "@/constants";
 import Image from "next/image";
 import React from "react";
-
 const Navbar = () => {
   return (
     <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md z-50 px-10">
@@ -14,6 +13,9 @@ const Navbar = () => {
             <a href="#insight" className="cursor-pointer">
               Historical Data
             </a>
+            <a href="localhost/callbackLO.html" className="cursor-pointer">
+              Logout
+            </a>
           </div>
         </div>
       </div>
@@ -22,4 +24,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
