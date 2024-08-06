@@ -13,7 +13,7 @@ const Navbar = () => {
             <a href="#insight" className="cursor-pointer">
               Historical Data
             </a>
-            <a href="http://localhost/callbackLO.html" className="cursor-pointer">
+            <a href="callbackLO.html" className="cursor-pointer">
               Logout
             </a>
           </div>
