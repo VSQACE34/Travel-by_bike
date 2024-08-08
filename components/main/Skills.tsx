@@ -66,7 +66,7 @@ const MapWithDirections = () => {
       loadMap();
     } else {
       const script = document.createElement("script");
-      script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ZEOQUCDrSneL4nbpipnJ2bIwNSIwAA8&libraries=places`;
       script.async = true;
       script.defer = true;
       script.onload = loadMap;
