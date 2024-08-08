@@ -13,7 +13,7 @@ const Navbar = () => {
             <a href="#insight" className="cursor-pointer">
               Historical Data
             </a>
-            <a href="#about us" className="cursor-pointer">About Us</a>
+            <a href="about us" className="cursor-pointer">About Us</a>
           </div>
         </div>
       </div>
