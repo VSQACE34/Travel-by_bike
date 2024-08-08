@@ -35,16 +35,18 @@ const MapWithDirections = () => {
           return;
         }
         const startLocation = place.geometry.location;
-        map.setCenter(startLocation);
-        if (currentLocationMarker) {
-          currentLocationMarker.setPosition(startLocation);
-        } else {
-          const marker = new google.maps.Marker({
-            position: startLocation,
-            map: map,
-            title: "Start Location",
-          });
-          setCurrentLocationMarker(marker);
+        if (startLocation) {
+          map.setCenter(startLocation);
+          if (currentLocationMarker) {
+            currentLocationMarker.setPosition(startLocation);
+          } else {
+            const marker = new google.maps.Marker({
+              position: startLocation,
+              map: map,
+              title: "Start Location",
+            });
+            setCurrentLocationMarker(marker);
+          }
         }
       });
 
@@ -64,7 +66,7 @@ const MapWithDirections = () => {
       loadMap();
     } else {
       const script = document.createElement("script");
-      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ZEOQUCDrSneL4nbpipnJ2bIwNSIwAA8&libraries=places`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places`;
       script.async = true;
       script.defer = true;
       script.onload = loadMap;
@@ -107,7 +109,7 @@ const MapWithDirections = () => {
       case error.TIMEOUT:
         alert("The request to get user location timed out.");
         break;
-      case error.UNKNOWN_ERROR:
+      default:
         alert("An unknown error occurred.");
         break;
     }
@@ -115,14 +117,14 @@ const MapWithDirections = () => {
 
   const calculateRoute = () => {
     const destination = (document.getElementById("destination") as HTMLInputElement).value;
-    let startLocation;
+    let startLocation: google.maps.LatLng | string | null = null;
 
     if (useCurrentLocation) {
       if (!currentLocationMarker) {
         getCurrentLocation();
         return;
       }
-      startLocation = currentLocationMarker.getPosition();
+      startLocation = currentLocationMarker.getPosition() ?? null;
     } else {
       startLocation = (document.getElementById("autocomplete") as HTMLInputElement).value;
       if (!startLocation) {
@@ -131,8 +133,24 @@ const MapWithDirections = () => {
       }
     }
 
+    if (typeof startLocation === "string") {
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ address: startLocation }, (results, status) => {
+        if (status === "OK" && results && results[0].geometry.location) {
+          startLocation = results[0].geometry.location;
+          requestRoute(startLocation, destination);
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    } else if (startLocation) {
+      requestRoute(startLocation, destination);
+    }
+  };
+
+  const requestRoute = (startLocation: google.maps.LatLng, destination: string) => {
     const request = {
-      origin: startLocation!,
+      origin: startLocation,
       destination: destination,
       travelMode: google.maps.TravelMode.DRIVING,
     };
@@ -197,4 +215,3 @@ const MapWithDirections = () => {
 };
 
 export default MapWithDirections;
-
