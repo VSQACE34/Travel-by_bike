@@ -13,9 +13,7 @@ const Navbar = () => {
             <a href="#insight" className="cursor-pointer">
               Historical Data
             </a>
-            <a href="/pages/aboutUs" className="cursor-pointer">
-              About Us
-            </a>
+            <a href="\pages\aboutUs" className="cursor-pointer">About Us</a>
           </div>
         </div>
       </div>
