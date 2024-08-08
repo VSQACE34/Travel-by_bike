@@ -152,7 +152,7 @@ const MapWithDirections = () => {
     const request = {
       origin: startLocation,
       destination: destination,
-      travelMode: google.maps.TravelMode.DRIVING,
+      travelMode: google.maps.TravelMode.BICYCLING,
     };
 
     directionsService!.route(request, (result, status) => {
