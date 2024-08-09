@@ -92,20 +92,18 @@ const MapWithAccidents = () => {
 
     loadMap();
   }, []);
-
+  
   return (
     <div style={{ height: "110vh", width: "100%" }}>
-      <div className="flex justify-center items-center">
-        <span className="text-transparent text-4xl bg-clip-text bg-gradient-to-r from-green-500 to-cyan-500">
-          Chloropleth{" "}
-        </span>
-        <span className="text-4xl font-bold ml-2">Map</span>
-      </div>
-      <div id="map" ref={mapRef} style={{ height: "100%" }}></div>
+    <div className="flex justify-center items-center">
+      <span className="text-transparent text-4xl bg-clip-text bg-gradient-to-r from-green-500 to-cyan-500">
+        Chloropleth{" "}
+      </span>
+      <span className="text-4xl font-bold ml-2">Map</span>
     </div>
-  );
+    <div id="map" ref={mapRef} style={{ height: "100%" }}></div>
+  </div>
+);
 };
 
 export default MapWithAccidents;
-
-
